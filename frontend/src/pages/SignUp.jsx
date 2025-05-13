@@ -3,7 +3,7 @@ import { useAuthStore } from '../store/useAuthStore'
 import { MessageSquare, User, Mail, Lock, Eye, EyeOff, Loader, Loader2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import AuthImagePattern from '../components/AuthImagePattern'
-import toast from 'react-hot-toast'
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
 
@@ -17,19 +17,40 @@ const SignUp = () => {
     const { signup, isSigningUp } = useAuthStore();
 
     const validateForm = () => {
-        if (!formData.fullName.trim()) return toast.error('Full name is required');
-        if (!formData.email.trim()) return toast.error('Email is required');
-        if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error('Invalid email format');
-        if (!formData.password) return toast.error('Password is required');
-        if (!formData.password.length < 6) return toast.error('Password must be at least 6 characters');
 
-        return true; 
-    }
+        if (!formData.fullName.trim()) {
+            toast.error('Full name is required');
+            return false;
+        }
+        if (!formData.email.trim()) {
+            toast.error('Email is required');
+            return false;
+        }
+        if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            toast.error('Invalid email format');
+            return false;
+        }
+        if (!formData.password) {
+            toast.error('Password is required');
+            return false;
+        }
+        if (formData.password.length < 6) {
+            toast.error('Password must be at least 6 characters');
+            return false;
+        }
 
+        return true;
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    }
+        const success = validateForm();
+        if (success) {
+            signup(formData);
+        }
+    };
+
+
     return (
         <div className='min-h-screen grid lg:grid-cols-2'>
             {/* left side */}
@@ -86,7 +107,7 @@ const SignUp = () => {
                                     <EyeOff className='size-5 text-base-content/40 z-10' />
                                 }
                             </div>
-                            <input type={showPassword ? 'text' : 'password'} className={`input input-bordered w-full pl-10 focus:outline-0`} placeholder='John Doe' value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
+                            <input type={showPassword ? 'text' : 'password'} className={`input input-bordered w-full pl-10 focus:outline-0`}  placeholder='******' value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
                         </div>
                     </div>
                     <button type='submit' className='btn btn-primary w-full' disabled={isSigningUp}>

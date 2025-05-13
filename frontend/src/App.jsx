@@ -9,7 +9,8 @@ import Profile from './pages/Profile'
 import { useAuthStore } from './store/useAuthStore'
 import { useEffect } from 'react'
 import { Loader } from 'lucide-react'
-import Toaster from 'react-hot-toast'
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function App() {
 
@@ -47,9 +48,14 @@ function App() {
           <Route path='/profile' element={authUser ? <Profile /> : <Navigate to='/login' />} />
         </Routes>
       </Router>
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
+      <ToastContainer
+        draggable
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        theme="light"
       />
     </>
   )
