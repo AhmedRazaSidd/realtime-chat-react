@@ -10,12 +10,13 @@ import { useAuthStore } from './store/useAuthStore'
 import { useEffect } from 'react'
 import { Loader } from 'lucide-react'
 import { ToastContainer, toast } from 'react-toastify';
+import { useThemeStore } from './store/useThemeStore'
 
 
 function App() {
 
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
-
+  const { theme } = useThemeStore();
 
   useEffect(() => {
     checkAuth();
@@ -29,15 +30,12 @@ function App() {
     )
   }
 
-
-  console.log('====================================');
-  console.log(authUser);
-  console.log('====================================');
-
+  // console.log('====================================');
+  // console.log(authUser);
+  // console.log('====================================');
 
   return (
-    <>
-
+    <div data-theme={theme}>
       <Router>
         <Navbar />
         <Routes>
@@ -57,7 +55,7 @@ function App() {
         pauseOnHover
         theme="light"
       />
-    </>
+    </div >
   )
 }
 
