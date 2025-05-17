@@ -100,7 +100,7 @@ const Login = () => {
                             <>
                                 <Loader2 className='size-5 animate-spin' />
                                 Loading...
-                            </> : 'Create Account'
+                            </> : 'Login'
                         }
                     </button>
                 </form>
