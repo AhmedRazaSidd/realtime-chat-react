@@ -1,5 +1,5 @@
 import axios from 'axios';
 export const axiosInstanace = axios.create({
-    baseURL: 'http://localhost:5001/api',
+    baseURL: 'https://realtime-chat-react-backend.vercel.app/api',
     withCredentials: true,
 })
