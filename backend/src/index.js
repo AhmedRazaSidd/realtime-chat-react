@@ -19,7 +19,7 @@ app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ limit: "5mb", extended: true }));
 app.use(cookiesParser());
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://realtime-chat-react.vercel.app',
     credentials: true,
 }));
 
