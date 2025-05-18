@@ -1,14 +1,16 @@
 {
   "name": "chat-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "A real-time chat application",
   "main": "index.js",
   "scripts": {
     "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "npm --prefix backend run start",
-    "frontend-build": "npm run build --prefix frontend"
-}
-  "keywords": [],
-  "author": "",
+    "start": "npm run build && npm --prefix backend run start",
+    "dev": "npm --prefix backend run dev",
+    "frontend": "npm start --prefix frontend",
+    "backend": "npm start --prefix backend"
+  },
+  "keywords": ["chat", "real-time", "messaging", "socket.io", "react", "nodejs"],
+  "author": "Your Name",
   "license": "ISC"
 }
