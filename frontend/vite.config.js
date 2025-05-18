@@ -7,6 +7,6 @@ import daisyui from 'daisyui'
 export default defineConfig({
   plugins: [react(), tailwindcss(), daisyui],
   build: {
-    outDir: 'public'
+    outDir: 'public/dist'
   }
 })
