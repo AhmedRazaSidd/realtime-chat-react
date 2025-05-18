@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useChatStore } from "../store/useChatStore"
 import { useAuthStore } from "../store/useAuthStore"
 import SidebarSkeleton from "./SidebarSkeleton";
@@ -7,10 +7,13 @@ import { User, Users } from "lucide-react";
 const Sidebar = () => {
     const { getUser, users, selectedUser, setSelectedUser, isUserLoading } = useChatStore();
     const { onlineUsers } = useAuthStore();
+    const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
     useEffect(() => {
         getUser();
     }, [getUser])
+
+    const filteredUsers = showOnlineOnly ? users.filter((user) => onlineUsers.includes(user._id)) : users;
 
     if (isUserLoading) return <SidebarSkeleton />
 
@@ -21,10 +24,17 @@ const Sidebar = () => {
                     <Users className="size-6" />
                     <span className="font-medium hidden lg:block">Contacts</span>
                 </div>
+                <div className="mt-3 hidden lg:flex items-center gap-2">
+                    <label className="cursor-pointer flex items-center gap-2">
+                        <input type="checkbox" className="checkbox checkbox-sm" onChange={(e) => setShowOnlineOnly(e.target.checked)} />
+                        <span>Show online only</span>
+                    </label>
+                    <span className="text-xs text-zinc-500">({onlineUsers.length - 1} Online)</span>
+                </div>
             </div>
             <div className="overflow-y-auto w-full py-3">
-                {users.map((user) => (
-                    <button key={user._id} className={`w-full p-3 flex items-center gap-3 hover:bg-base-300 cursor-pointer transition-colors ${selectedUser?._id === user._id ? 'bg-base-300 ring ring-base-300' : ''}`} onClick={()=> setSelectedUser(user)}>
+                {filteredUsers.map((user) => (
+                    <button key={user._id} className={`w-full p-3 flex items-center gap-3 hover:bg-base-300 cursor-pointer transition-colors ${selectedUser?._id === user._id ? 'bg-base-300 ring ring-base-300' : ''}`} onClick={() => setSelectedUser(user)}>
                         <div className="relative mx-auto lg:mx-0">
                             <img src={user.profilePic || '/avatar.jpg'} alt={user.name} className="size-12 object-cover rounded-full" />
                             {onlineUsers.includes(user._id) && (
@@ -40,6 +50,10 @@ const Sidebar = () => {
                         </div>
                     </button>
                 ))}
+
+                {filteredUsers.length === 0 && (
+                    <div className="text-center text-zinc-500 py-4">No online users</div>
+                )}
             </div>
         </aside>
     )
