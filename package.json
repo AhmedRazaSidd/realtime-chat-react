@@ -4,13 +4,18 @@
   "description": "A real-time chat application",
   "main": "index.js",
   "scripts": {
-    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "npm run build && npm --prefix backend run start",
-    "dev": "npm --prefix backend run dev",
+    "install": "npm install --prefix backend && npm install --prefix frontend",
+    "build": "npm run install && npm run build:frontend",
+    "start": "npm run build && npm run start:backend",
+    "dev": "npm run dev:backend & npm run dev:frontend",
     "frontend": "npm start --prefix frontend",
-    "backend": "npm start --prefix backend"
+    "backend": "npm start --prefix backend",
+    "build:frontend": "npm run build --prefix frontend",
+    "start:backend": "npm start --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend"
   },
   "keywords": ["chat", "real-time", "messaging", "socket.io", "react", "nodejs"],
-  "author": "Your Name",
+  "author": "Ahmed Raza",
   "license": "ISC"
 }
