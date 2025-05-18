@@ -6,7 +6,4 @@ import daisyui from 'daisyui'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss(), daisyui],
-  build: {
-    outDir: 'public/dist'
-  }
 })

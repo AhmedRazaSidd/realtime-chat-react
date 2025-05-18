@@ -19,7 +19,7 @@ app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ limit: "5mb", extended: true }));
 app.use(cookiesParser());
 app.use(cors({
-    origin: import.meta.env.NODE_ENV === 'development' ? 'http://localhost:5173' : '/',
+    origin: 'http://localhost:5173',
     credentials: true,
 }));
 
@@ -28,13 +28,13 @@ app.use(cors({
 app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);
 
-if (process.env.NODE_ENV==='production') {
-    app.use(express.static(path.json(__dirname,'../frontend/public/dist')));
+// if (process.env.NODE_ENV==='production') {
+//     app.use(express.static(path.json(__dirname,'../frontend/public/dist')));
 
-    app.get('*',(req,res)=>{
-        res.sendFile(path.join(__dirname,'../frontend/public','dist','index.html'));
-    })
-}
+//     app.get('*',(req,res)=>{
+//         res.sendFile(path.join(__dirname,'../frontend/public','dist','index.html'));
+//     })
+// }
 
 // Start Server
 server.listen(PORT, () => {
