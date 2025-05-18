@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { axiosInstanace } from "../lib/axios"
 import { create } from 'zustand'
 import { io } from 'socket.io-client'
-const BASE_URL = 'http://localhost:5001'
+const BASE_URL = 'https://realtime-chat-react-backend.vercel.app'
 export const useAuthStore = create((set, get) => ({
     authUser: null,
     isSigningUp: false,
