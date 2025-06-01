@@ -14,7 +14,7 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 // const __dirname = path.resolve();
 
-(async () => {
+    (async () => {
     try {
         // Connect to the Database
         await connectDB();
